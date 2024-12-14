@@ -1,13 +1,17 @@
-const express = require('express')
-const mysql = require('mysql')
-const app = express()
-const port = 3000
-const bodyParser = require('body-parser')
-const db = require('./connection')
-const response = require('./response')
-// route / url / endpoint utama kita method get
-app.use(bodyParser.json())
+const express = require('express');
+const mysql = require('mysql');
+const app = express();
+const port = 3000;
+const bodyParser = require('body-parser');
+const db = require('./connection'); // Pastikan file `connection.js` Anda benar
+const response = require('./response'); // Jika tidak digunakan, Anda bisa menghapus ini
 
+// Middleware
+app.use(bodyParser.json());
+
+
+
+// Endpoint untuk mendapatkan daftar perusahaanv
 app.get('/companies', (req, res) => {
   db.query('SELECT * FROM companies', (err, results) => {
     if (err) return res.status(500).json(err);
